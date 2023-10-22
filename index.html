@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="clicki()">turn on/off</button>
+    <script>
+        function clicki() {
+            if ('torch' in navigator) {
+            // Get a reference to the torch object
+            const torch = navigator.torch;
+
+            // Check if the torch is available
+            if (torch.available) {
+                // Toggle the torch (flashlight) on and off
+                if (torch.active) {
+                    // Torch is currently on, turn it off
+                    torch.turnOff()
+                        .then(() => {
+                            console.log('Flashlight turned off.');
+                        })
+                        .catch((error) => {
+                            console.error('Error turning off flashlight:', error);
+                        });
+                } else {
+                    // Torch is currently off, turn it on
+                    torch.turnOn()
+                        .then(() => {
+                            console.log('Flashlight turned on.');
+                        })
+                        .catch((error) => {
+                            console.error('Error turning on flashlight:', error);
+                        });
+                }
+            } else {
+                console.log('Flashlight is not available on this device.');
+            }
+        } else {
+            console.log('Torch API is not supported in this browser.');
+        }
+        }
+    </script>
+</body>
+
+</html>
